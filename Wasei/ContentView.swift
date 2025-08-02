@@ -133,6 +133,14 @@ struct ContentView: View {
                 judgeResult = "同じ2つの声部が連続して完全8度になっているよ"
                 return
             }
+            
+            // 隠伏5度のチェック
+            if diff_of_soprano * diff_of_bass > 0 {
+                if (abs(self.arrayOfSATB[i - 1][0] - self.arrayOfSATB[i - 1][3])) % 12 == 7 {
+                    judgeResult = "外声（ソプラノとバス）が同方向に進行し、結果として完全5度の関係（隠伏5度）になっているよ."
+                    return
+                }
+            }
         }
         
         judgeResult = "OK"
