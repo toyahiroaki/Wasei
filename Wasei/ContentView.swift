@@ -94,6 +94,40 @@ struct ContentView: View {
             print("diff_of_tenor:" + String(diff_of_tenor))
             print("diff_of_bass:" + String(diff_of_bass))
             
+            // ７度の跳躍チェック
+            if abs(diff_of_soprano) == 10 {
+                judgeResult = "ソプラノが短7度の跳躍になっているよ"
+                return
+            }
+            if abs(diff_of_soprano) == 11  {
+                judgeResult = "ソプラノが長7度の跳躍になっているよ"
+                return
+            }
+            if abs(diff_of_alto) == 10 {
+                judgeResult = "アルトが短7度の跳躍になっているよ"
+                return
+            }
+            if abs(diff_of_alto) == 11  {
+                judgeResult = "アルトが長7度の跳躍になっているよ"
+                return
+            }
+            if abs(diff_of_tenor) == 10 {
+                judgeResult = "テノールが短7度の跳躍になっているよ"
+                return
+            }
+            if abs(diff_of_tenor) == 11  {
+                judgeResult = "テノールが長7度の跳躍になっているよ"
+                return
+            }
+            if abs(diff_of_bass) == 10 {
+                judgeResult = "バスが短7度の跳躍になっているよ"
+                return
+            }
+            if abs(diff_of_bass) == 11  {
+                judgeResult = "バスが長7度の跳躍になっているよ"
+                return
+            }
+            
             // 並行5度のチェック
             var parallelFifthCount = 0
             
