@@ -94,6 +94,20 @@ struct ContentView: View {
             print("diff_of_tenor:" + String(diff_of_tenor))
             print("diff_of_bass:" + String(diff_of_bass))
             
+            // 同じ音を2声部が連続（連続ユニゾン）のチェック
+            if diff_of_soprano == 0 && diff_of_alto == 0 {
+                judgeResult = "同じ音を2声部が連続（連続ユニゾン）しているよ"
+                return
+            }
+            if diff_of_soprano == 0 && diff_of_tenor == 0 {
+                judgeResult = "同じ音を2声部が連続（連続ユニゾン）しているよ"
+                return
+            }
+            if diff_of_alto == 0 && diff_of_tenor == 0 {
+                judgeResult = "同じ音を2声部が連続（連続ユニゾン）しているよ"
+                return
+            }
+            
             // ７度の跳躍チェック
             if abs(diff_of_soprano) == 10 {
                 judgeResult = "ソプラノが短7度の跳躍になっているよ"
