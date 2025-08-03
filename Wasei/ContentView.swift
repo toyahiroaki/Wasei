@@ -128,6 +128,30 @@ struct ContentView: View {
                 return
             }
             
+            // 複音程のチェック
+            if abs(diff_of_soprano) > 12 {
+                judgeResult = "ソプラノが１オクターブを超える跳躍（複音程）になっているよ"
+                return
+            }
+            if abs(diff_of_alto) > 12 {
+                judgeResult = "アルトが１オクターブを超える跳躍（複音程）になっているよ"
+                return
+            }
+            if abs(diff_of_tenor) > 12 {
+                judgeResult = "テノールが１オクターブを超える跳躍（複音程）になっているよ"
+                return
+            }
+            if abs(diff_of_bass) > 12 {
+                judgeResult = "ソプラノが１オクターブを超える跳躍（複音程）になっているよ"
+                return
+            }
+            
+            // 増4度進行のチェック
+            if abs(diff_of_soprano) == 6 {
+                judgeResult = "ソプラノが増4度進行になっているよ"
+                return
+            }
+            
             // 並行5度のチェック
             var parallelFifthCount = 0
             
