@@ -246,16 +246,16 @@ struct ContentView: View {
     }
 
     var body: some View {
-            HStack {
-                leftView
-                centerView
-                rightView
-            }
-        .padding()
+        VStack {
+            headerView
+            centerView
+            footerView
+        }
+        //.padding()
     }
     
-    var leftView: some View {
-        VStack {
+    var headerView: some View {
+        HStack {
             ForEach(questionButton, id: \.self) { qb in
                 Button(action: {
                     
@@ -371,7 +371,7 @@ struct ContentView: View {
         }
     }
     
-    var rightView: some View {
+    var footerView: some View {
         Button(action: {
             judge(i: self.nowPosition)
             self.isShowAlert = true
