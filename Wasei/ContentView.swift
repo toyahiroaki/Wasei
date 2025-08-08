@@ -11,33 +11,35 @@ struct ContentView: View {
     
     @State private var show: Bool = false
     
-    let data: [Int] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+    //let data: [Int] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+    let data: [Int] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
     let questionButton: [Int] = [0,1,2,3]
-    let midiData: [String] = ["C3","B2","A2","G2","F2","E2","D2","C2","B1","A1","G1","F1","E1","D1","C1"]
+    //let midiData: [String] = ["C3","B2","A2","G2","F2","E2","D2","C2","B1","A1","G1","F1","E1","D1","C1"]
+    let midiData: [String] = ["A3","G3","F3","E3","D3","C3","B2","A2","G2","F2","E2","D2","C2","B1","A1","G1","F1","E1","D1","C1","F0","G0","A0","B0"]
     @State var column_color:[[Color]] = [
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
-        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream]
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
+        [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream]
     ]
     
     @State var column_flag:[[Bool]] = [
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+        [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
     ]
     
     @State var qNo = 0
@@ -71,7 +73,7 @@ struct ContentView: View {
     func judge(i: Int) {
         var noteCount = 0
         var arrayOfSATBCount = 0
-        for j in 0 ..< 15{
+        for j in 0 ..< midiMap.count{
             if self.column_flag[i - 1][j] {
                 noteCount += 1
                 self.arrayOfSATB[i - 1][arrayOfSATBCount] = midiMap[j]
@@ -216,13 +218,13 @@ struct ContentView: View {
         }
         
         judgeResult = "OK"
-        for j in 0 ..< 15{
+        for j in 0 ..< midiMap.count{
             if self.column_flag[i - 1][j] {
             } else {
                 self.column_color[i - 1][j] = Color.gray
             }
         }
-        for j in 0 ..< 15{
+        for j in 0 ..< midiMap.count{
             if self.column_flag[i][j] {
             } else {
                 self.column_color[i][j] = col_cream
@@ -233,11 +235,11 @@ struct ContentView: View {
     
     func initialaize() {
         nowPosition = 0
-        for j in 0 ..< 15{
+        for j in 0 ..< midiMap.count{
             self.column_color[0][j] = col_cream
         }
         for i in 1 ..< 10{
-            for j in 0 ..< 15{
+            for j in 0 ..< midiMap.count{
                 self.column_color[i][j] = Color.gray
             }
         }

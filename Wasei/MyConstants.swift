@@ -13,7 +13,8 @@ let col_brown: Color = Color(red: 140/255, green: 56/255, blue: 40/255)
 let col_pink: Color = Color(red: 240/255, green: 84/255, blue: 145/255)
 let col_cyan: Color = Color(red: 175/255, green: 238/255, blue: 238/255)
 
-let midiMap = [48,47,45,43,41,40,38,36,35,33,31,29,28,26,24]
+//let midiMap = [48,47,45,43,41,40,38,36,35,33,31,29,28,26,24]
+let midiMap = [57,55,53,52,50,48,47,45,43,41,40,38,36,35,33,31,29,28,26,24,23,21,19,17]
 
 let questions:[[Int]] = [
     [14,11,12,13,11,10,11,12,13,14],
