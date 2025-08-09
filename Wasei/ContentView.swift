@@ -47,6 +47,7 @@ struct ContentView: View {
     @State var nowPosition: Int = 0
     @State var isShowAlert = false
     @State var judgeResult = "判定結果の初期値"
+    @State var chordName: [String] = ["?","?","?","?","?","?","?","?","?","?","?"]
     
     @State var arrayOfSATB:[[Int]] = [
         [0,0,0,0],
@@ -246,6 +247,24 @@ struct ContentView: View {
             }
         }
         self.nowPosition += 1
+        
+        var chordJudge: [Int] = [0, 0, 0, 0]
+        chordJudge[0] = self.arrayOfSATB[i - 1][0] % 12
+        chordJudge[1] = self.arrayOfSATB[i - 1][1] % 12
+        chordJudge[2] = self.arrayOfSATB[i - 1][2] % 12
+        chordJudge[3] = self.arrayOfSATB[i - 1][3] % 12
+        
+        let uniqueSorted = chordJudge.sorted().reduce(into: [Int]()) { result, value in
+            if result.last != value {
+                result.append(value)
+            }
+        }
+        
+        let targets = [0, 4, 7]
+        if (targets.allSatisfy{ uniqueSorted.contains($0) }){
+            self.chordName[i - 1] = "C"
+        }
+        return
     }
     
     func initialaize() {
@@ -337,6 +356,7 @@ struct ContentView: View {
                         
                         Divider()
                     }
+                    Text(self.chordName[0]).font(.caption).foregroundColor(Color.black)
                 }
                 // 2列目
                 VStack {
