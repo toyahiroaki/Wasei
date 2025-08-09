@@ -86,6 +86,20 @@ struct ContentView: View {
             return
         }
         
+        // 音域チェック
+        if self.arrayOfSATB[i - 1][0] > 57 || self.arrayOfSATB[i - 1][0] < 36 {
+            judgeResult = "ソプラノの音域はC2〜A3にしてね"
+            return
+        }
+        if self.arrayOfSATB[i - 1][1] > 50 || self.arrayOfSATB[i - 1][1] < 31 {
+            judgeResult = "アルトの音域はG1〜D3にしてね"
+            return
+        }
+        if self.arrayOfSATB[i - 1][2] > 45 || self.arrayOfSATB[i - 1][2] < 24 {
+            judgeResult = "テノールの音域はC1〜A2にしてね"
+            return
+        }
+        
         if i >= 2 {
             let diff_of_soprano = self.arrayOfSATB[i - 1][0] - self.arrayOfSATB[i - 2][0]
             let diff_of_alto = self.arrayOfSATB[i - 1][1] - self.arrayOfSATB[i - 2][1]
