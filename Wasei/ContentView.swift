@@ -264,6 +264,16 @@ struct ContentView: View {
         if (targets.allSatisfy{ uniqueSorted.contains($0) }){
             self.chordName[i - 1] = "C"
         }
+        
+        let targetsFonC = [0, 5, 9]
+        if (targetsFonC.allSatisfy{ uniqueSorted.contains($0) }){
+            self.chordName[i - 1] = "F/C"
+        }
+        
+        let targetsAmonC = [0, 4, 9]
+        if (targetsAmonC.allSatisfy{ uniqueSorted.contains($0) }){
+            self.chordName[i - 1] = "Am/C"
+        }
         return
     }
     
