@@ -352,65 +352,23 @@ struct ContentView: View {
     var centerView: some View {
         ScrollView(.horizontal) {
             HStack {
-                // 1列目
-                VStack {
-                    Text("1").font(.caption).foregroundColor(Color.black)
-                    ForEach(data, id: \.self) { index in
-                        Button(" " + midiData[index] + "    ") {
-                            coloring(i: 0, j: index)
+                ForEach(0..<8, id: \.self) { column in
+                    VStack {
+                        Text(String(column + 1)).font(.caption).foregroundColor(Color.black)
+                        ForEach(data, id: \.self) { row in
+                            Button(" " + midiData[row] + "    ") {
+                                coloring(i: column, j: row)
+                            }
+                            .foregroundColor(Color.black)
+                            .background(column_color[column][row])
+                            .frame(width: 40, height: 5)
+                            .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
+                            
+                            Divider()
                         }
-                        .foregroundColor(Color.black)
-                        .background(column_color[0][index])
-                        .frame(width: 40, height: 5)
-                        .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
-                        
-                        Divider()
+                        Text(self.chordName[column]).font(.caption).foregroundColor(Color.black)
                     }
-                    Text(self.chordName[0]).font(.caption).foregroundColor(Color.black)
-                }
-                // 2列目
-                VStack {
-                    Text("2").font(.caption).foregroundColor(Color.black)
-                    ForEach(data, id: \.self) { index in
-                        Button(" " + midiData[index] + "    ") {
-                            coloring(i: 1, j: index)
-                        }
-                        .foregroundColor(Color.black)
-                        .background(column_color[1][index])
-                        .frame(width: 40, height: 5)
-                        .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
-                        Divider()
-                    }
-                }
-                Divider()
-                // 3列目
-                VStack {
-                    Text("3").font(.caption).foregroundColor(Color.black)
-                    ForEach(data, id: \.self) { index in
-                        Button(" " + midiData[index] + "    ") {
-                            coloring(i: 2, j: index)
-                        }
-                        .foregroundColor(Color.black)
-                        .background(column_color[2][index])
-                        .frame(width: 40, height: 5)
-                        .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
-                        Divider()
-                    }
-                }
-                Divider()
-                // 4列目
-                VStack {
-                    Text("4").font(.caption).foregroundColor(Color.black)
-                    ForEach(data, id: \.self) { index in
-                        Button(" " + midiData[index] + "    ") {
-                            coloring(i: 3, j: index)
-                        }
-                        .foregroundColor(Color.black)
-                        .background(column_color[3][index])
-                        .frame(width: 40, height: 5)
-                        .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
-                        Divider()
-                    }
+                    Divider()
                 }
             }
         }
