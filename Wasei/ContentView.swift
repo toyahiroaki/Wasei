@@ -356,14 +356,22 @@ struct ContentView: View {
                     VStack {
                         Text(String(column + 1)).font(.caption).foregroundColor(Color.black)
                         ForEach(data, id: \.self) { row in
-                            Button(" " + midiData[row] + "    ") {
-                                coloring(i: column, j: row)
+                            HStack(spacing: 0) {
+                                Button(" " + midiData[row] + "    ") {
+                                    coloring(i: column, j: row)
+                                }
+                                .foregroundColor(Color.black)
+                                .background(column_color[column][row])
+                                .frame(width: 38, height: 5)
+                                .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
+                                Button(" " + midiData[row] + "    ") {
+                                    coloring(i: column, j: row)
+                                }
+                                .foregroundColor(Color.black)
+                                .background(column_color[column][row])
+                                .frame(width: 38, height: 5)
+                                .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
                             }
-                            .foregroundColor(Color.black)
-                            .background(column_color[column][row])
-                            .frame(width: 40, height: 5)
-                            .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
-                            
                             Divider()
                         }
                         Text(self.chordName[column]).font(.caption).foregroundColor(Color.black)
