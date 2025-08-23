@@ -110,7 +110,7 @@ struct ContentView: View {
         for j in 0 ..< midiMap.count{
             if self.column_flag3[i - 1][nowBeat][j] {
                 noteCount += 1
-                nowBeat = (nowBeat + 1) % 2
+                
                 self.arrayOfSATB[i - 1][arrayOfSATBCount] = midiMap[j]
                 arrayOfSATBCount += 1
             }
@@ -280,6 +280,7 @@ struct ContentView: View {
             }
         }
         self.nowPosition += 1
+        self.nowBeat = (nowBeat + 1) % 2
         
         var chordJudge: [Int] = [0, 0, 0, 0]
         chordJudge[0] = self.arrayOfSATB[i - 1][0] % 12
