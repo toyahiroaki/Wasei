@@ -273,14 +273,18 @@ struct ContentView: View {
                 self.column_color3[i - 1][nowBeat][j] = Color.gray
             }
         }
+        self.nowBeat = (nowBeat + 1) % 2
+        if nowBeat == 1  {
+            self.nowPosition += 1
+        }
         for j in 0 ..< midiMap.count{
-            if self.column_flag3[i][nowBeat][j] {
+            if self.column_flag3[nowPosition - 2][nowBeat][j] {
             } else {
-                self.column_color3[i][nowBeat][j] = col_cream
+                self.column_color3[nowPosition - 2][nowBeat][j] = col_cream
             }
         }
-        self.nowPosition += 1
-        self.nowBeat = (nowBeat + 1) % 2
+        
+        
         
         var chordJudge: [Int] = [0, 0, 0, 0]
         chordJudge[0] = self.arrayOfSATB[i - 1][0] % 12
