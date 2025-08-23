@@ -14,7 +14,7 @@ struct ContentView: View {
     //let data: [Int] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
     let data: [Int] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
     let questionButton: [Int] = [0,1,2]
-    let midiData: [String] = ["A3","G3","F3","E3","D3","C3","B2","A2","G2","F2","E2","D2","C2","B1","A1","G1","F1","E1","D1","C1","F0","G0","A0","B0"]
+    let midiData: [String] = ["A3","G3","F3","E3","D3","C3","B2","A2","G2","F2","E2","D2","C2","B1","A1","G1","F1","E1","D1","C1","B0","A0","G0","F0"]
     /*
     @State var column_color:[[Color]] = [
         [col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream,col_cream],
@@ -66,7 +66,9 @@ struct ContentView: View {
     ]
     
     let questions2:[[[Int]]] = [
-        [[20, 20],[20, 17],[18, 17],[16, 16],[15, 17],[18, 19],[16, 16],[20, 20]]
+        [[20, 20],[20, 17],[18, 17],[16, 16],[15, 17],[18, 19],[16, 16],[20, 20]],
+        [[20, 21],[20, 16],[15, 17],[16, 16],[18, 17],[16, 16],[20, 17],[20, 20]],
+        [[20, 16],[15, 17],[17, 18],[16, 16],[20, 18],[17, 17],[16, 23],[20, 20]]
     ]
     
     @State var qNo = 0
