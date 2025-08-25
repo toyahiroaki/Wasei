@@ -266,25 +266,28 @@ struct ContentView: View {
             }
         }
         
-        judgeResult = "OK"
         for j in 0 ..< midiMap.count{
-            if self.column_flag3[i - 1][nowBeat][j] {
+            if self.column_flag3[i - 1][self.nowBeat][j] {
             } else {
-                self.column_color3[i - 1][nowBeat][j] = Color.gray
-            }
-        }
-        if nowBeat == 1  {
-            self.nowPosition += 1
-        }
-        self.nowBeat = (nowBeat + 1) % 2
-        for j in 0 ..< midiMap.count{
-            if self.column_flag3[nowPosition - 1][nowBeat][j] {
-            } else {
-                self.column_color3[nowPosition - 1][nowBeat][j] = col_cream
+                self.column_color3[i - 1][self.nowBeat][j] = Color.gray
             }
         }
         
-        
+        if self.nowPosition == 8 && self.nowBeat == 1 {
+            self.judgeResult = "クリア"
+        } else {
+            self.judgeResult = "OK"
+            if self.nowBeat == 1  {
+                self.nowPosition += 1
+            }
+            self.nowBeat = (self.nowBeat + 1) % 2
+            for j in 0 ..< midiMap.count{
+                if self.column_flag3[self.nowPosition - 1][self.nowBeat][j] {
+                } else {
+                    self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_cream
+                }
+            }
+        }
         
         var chordJudge: [Int] = [0, 0, 0, 0]
         chordJudge[0] = self.arrayOfSATB[i - 1][0] % 12
