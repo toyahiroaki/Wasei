@@ -106,11 +106,11 @@ struct ContentView: View {
         }
     }
     
-    func judgeChord(i: Int, j: Int, k: Int) {
-        if self.column_flag3[i][k][j] {
-            self.chordJudge.append(midiMap[j] % 12)
-        } else {
-            self.chordJudge.remove(at: self.chordJudge.firstIndex(of: midiMap[j] % 12)!)
+    func judgeChord(i: Int, k: Int) {
+        for j in 0 ..< midiMap.count{
+            if self.column_flag3[i][k][j] {
+                self.chordJudge.append(midiMap[j] % 12)
+            }
         }
         let uniqueSorted = chordJudge.sorted().reduce(into: [Int]()) { result, value in
             if result.last != value {
@@ -414,7 +414,7 @@ struct ContentView: View {
                             HStack(spacing: 0) {
                                 Button(" " + midiData[row] + "    ") {
                                     coloring(i: column, j: row, k: 0)
-                                    judgeChord(i: column, j: row, k: 0)
+                                    judgeChord(i: column, k: 0)
                                 }
                                 .foregroundColor(Color.black)
                                 .background(column_color3[column][0][row])
@@ -422,7 +422,7 @@ struct ContentView: View {
                                 .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
                                 Button(" " + midiData[row] + "    ") {
                                     coloring(i: column, j: row, k: 1)
-                                    judgeChord(i: column, j: row, k: 1)
+                                    judgeChord(i: column, k: 1)
                                 }
                                 .foregroundColor(Color.black)
                                 .background(column_color3[column][1][row])
