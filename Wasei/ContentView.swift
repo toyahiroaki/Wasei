@@ -182,15 +182,15 @@ struct ContentView: View {
             
             // 同じ音を2声部が連続（連続ユニゾン）のチェック
             if diff_of_soprano == 0 && diff_of_alto == 0 {
-                judgeResult = "同じ音を2声部が連続（連続ユニゾン）しているよ"
+                judgeResult = "同じ音を2声部（ソプラノとアルト）が連続（連続ユニゾン）しているよ"
                 return
             }
             if diff_of_soprano == 0 && diff_of_tenor == 0 {
-                judgeResult = "同じ音を2声部が連続（連続ユニゾン）しているよ"
+                judgeResult = "同じ音を2声部（ソプラノとテノール）が連続（連続ユニゾン）しているよ"
                 return
             }
             if diff_of_alto == 0 && diff_of_tenor == 0 {
-                judgeResult = "同じ音を2声部が連続（連続ユニゾン）しているよ"
+                judgeResult = "同じ音を2声部（アルトとテノール）が連続（連続ユニゾン）しているよ"
                 return
             }
             
