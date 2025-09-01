@@ -247,8 +247,20 @@ struct ContentView: View {
             }
             
             // 増4度進行のチェック
-            if abs(diff_of_soprano) == 6 {
+            if diff_of_soprano == 6 {
                 judgeResult = "ソプラノが増4度進行になっているよ"
+                return
+            }
+            if diff_of_alto == 6 {
+                judgeResult = "アルトが増4度進行になっているよ"
+                return
+            }
+            if diff_of_tenor == 6 {
+                judgeResult = "テノールが増4度進行になっているよ"
+                return
+            }
+            if diff_of_bass == 6 {
+                judgeResult = "バスが増4度進行になっているよ"
                 return
             }
             
