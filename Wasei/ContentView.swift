@@ -431,7 +431,7 @@ struct ContentView: View {
                             }
                             Divider()
                         }
-                        HStack {
+                        HStack(spacing: 30) {
                             Text(self.chordName[column][0]).font(.caption).foregroundColor(Color.black)
                             Text(self.chordName[column][1]).font(.caption).foregroundColor(Color.black)
                         }
