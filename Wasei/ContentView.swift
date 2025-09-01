@@ -169,6 +169,18 @@ struct ContentView: View {
             return
         }
         
+        // 導音重複不良のチェック
+        let array = [self.arrayOfSATB[i - 1][0] % 12, self.arrayOfSATB[i - 1][1]  % 12, self.arrayOfSATB[i - 1][2]  % 12, self.arrayOfSATB[i - 1][2]  % 12]
+
+        let duplicates = Dictionary(grouping: array, by: { $0 })
+            .filter { $1.count > 1 }
+            .map { $0.key }
+        if duplicates.contains(11) {
+            judgeResult = "導音が重複しているよ"
+            return
+        }
+        
+        
         if i >= 2 {
             let diff_of_soprano = self.arrayOfSATB[i - 1][0] - self.arrayOfSATB[i - 2][0]
             let diff_of_alto = self.arrayOfSATB[i - 1][1] - self.arrayOfSATB[i - 2][1]
