@@ -82,16 +82,24 @@ struct ContentView: View {
     @State var chordName: [[String]] = [["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"]]
     
     @State var arrayOfSATB:[[Int]] = [
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0]
+        [0,0,0,0],[0,0,0,0],
+        [0,0,0,0],[0,0,0,0],
+        [0,0,0,0],[0,0,0,0],
+        [0,0,0,0],[0,0,0,0],
+        [0,0,0,0],[0,0,0,0],
+        [0,0,0,0],[0,0,0,0],
+        [0,0,0,0],[0,0,0,0],
+        [0,0,0,0],[0,0,0,0]
+    ]
+    @State var arrayOfSATB3:[[[Int]]] = [
+        [[0,0,0,0],[0,0,0,0]],
+        [[0,0,0,0],[0,0,0,0]],
+        [[0,0,0,0],[0,0,0,0]],
+        [[0,0,0,0],[0,0,0,0]],
+        [[0,0,0,0],[0,0,0,0]],
+        [[0,0,0,0],[0,0,0,0]],
+        [[0,0,0,0],[0,0,0,0]],
+        [[0,0,0,0],[0,0,0,0]]
     ]
     
     @State var chordJudge: [Int] = []
@@ -147,6 +155,8 @@ struct ContentView: View {
                 noteCount += 1
                 
                 self.arrayOfSATB[i - 1][arrayOfSATBCount] = midiMap[j]
+                self.arrayOfSATB3[i - 1][self.nowBeat][arrayOfSATBCount] = midiMap[j]
+
                 arrayOfSATBCount += 1
             }
         }
@@ -192,6 +202,21 @@ struct ContentView: View {
             print("diff_of_tenor:" + String(diff_of_tenor))
             print("diff_of_bass:" + String(diff_of_bass))
             
+            // 同方向への三段跳躍チェック
+            if self.nowBeat == 1 {
+                let diff_of_soprano_1_before = self.arrayOfSATB3[i - 1][1][0] - self.arrayOfSATB3[i - 1][0][0]
+                let diff_of_soprano_2_before = self.arrayOfSATB3[i - 1][0][0] - self.arrayOfSATB3[i - 2][1][0]
+                let diff_of_soprano_3_before = self.arrayOfSATB3[i - 2][1][0] - self.arrayOfSATB3[i - 2][0][0]
+                print(diff_of_soprano_1_before)
+                print(diff_of_soprano_2_before)
+                print(diff_of_soprano_3_before)
+                
+                if diff_of_soprano_1_before >= 3 && diff_of_soprano_2_before >= 3 && diff_of_soprano_3_before >= 3 {
+                    judgeResult = "ソプラノが同方向への三段跳躍しているよ"
+                    return
+                }
+
+            }
             // 同じ音を2声部が連続（連続ユニゾン）のチェック
             if diff_of_soprano == 0 && diff_of_alto == 0 {
                 judgeResult = "同じ音を2声部（ソプラノとアルト）が連続（連続ユニゾン）しているよ"
