@@ -102,7 +102,7 @@ struct ContentView: View {
         [[0,0,0,0],[0,0,0,0]]
     ]
     
-    @State var chordJudge: [Int] = []
+    //@State var chordJudge: [Int] = []
 
     
     func coloring(i: Int, j: Int, k: Int) {
@@ -115,9 +115,11 @@ struct ContentView: View {
     }
     
     func judgeChord(i: Int, k: Int) {
+        var chordJudge: [Int] = []
         for j in 0 ..< midiMap.count{
             if self.column_flag3[i][k][j] {
-                self.chordJudge.append(midiMap[j] % 12)
+                //self.chordJudge.append(midiMap[j] % 12)
+                chordJudge.append(midiMap[j] % 12)
             }
         }
         let uniqueSorted = chordJudge.sorted().reduce(into: [Int]()) { result, value in
@@ -126,23 +128,37 @@ struct ContentView: View {
             }
         }
         
-        let targets = [0, 4, 7]
-        if (targets.allSatisfy{ uniqueSorted.contains($0) }){
-            self.chordName[i][k] = "C"
-            return
+        // ルートがCの場合
+        if self.questions2[self.qNo][i][k]  == 20 {
+            let targets = [0, 4, 7]
+            if (targets.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "C"
+                return
+            }
+            
+            let targetsFonC = [0, 5, 9]
+            if (targetsFonC.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "F/C"
+                return
+            }
+            
+            let targetsAmonC = [0, 4, 9]
+            if (targetsAmonC.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Am/C"
+                return
+            }
         }
         
-        let targetsFonC = [0, 5, 9]
-        if (targetsFonC.allSatisfy{ uniqueSorted.contains($0) }){
-            self.chordName[i][k] = "F/C"
-            return
+        // ルートがFの場合
+        print(self.questions2[self.qNo][i][k])
+        if self.questions2[self.qNo][i][k]  == 17 {
+            let targetsF = [0, 5, 9]
+            if (targetsF.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "F"
+                return
+            }
         }
         
-        let targetsAmonC = [0, 4, 9]
-        if (targetsAmonC.allSatisfy{ uniqueSorted.contains($0) }){
-            self.chordName[i][k] = "Am/C"
-            return
-        }
         self.chordName[i][k] = "?"
         return
     }
@@ -153,7 +169,10 @@ struct ContentView: View {
         for j in 0 ..< midiMap.count{
             if self.column_flag3[i - 1][nowBeat][j] {
                 noteCount += 1
-                
+                if noteCount > 4 {
+                    judgeResult = "四声にしてね"
+                    return
+                }
                 self.arrayOfSATB[i - 1][arrayOfSATBCount] = midiMap[j]
                 self.arrayOfSATB3[i - 1][self.nowBeat][arrayOfSATBCount] = midiMap[j]
 
