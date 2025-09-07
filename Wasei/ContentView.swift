@@ -210,11 +210,22 @@ struct ContentView: View {
         }
         
         
-        if i >= 2 {
-            let diff_of_soprano = self.arrayOfSATB[i - 1][0] - self.arrayOfSATB[i - 2][0]
-            let diff_of_alto = self.arrayOfSATB[i - 1][1] - self.arrayOfSATB[i - 2][1]
-            let diff_of_tenor = self.arrayOfSATB[i - 1][2] - self.arrayOfSATB[i - 2][2]
-            let diff_of_bass = self.arrayOfSATB[i - 1][3] - self.arrayOfSATB[i - 2][3]
+        if !(i == 1 && self.nowBeat == 0) {
+            var diff_of_soprano = 0
+            var diff_of_alto = 0
+            var diff_of_tenor = 0
+            var diff_of_bass = 0
+            if self.nowBeat == 0 {
+                diff_of_soprano = self.arrayOfSATB3[i - 1][0][0] - self.arrayOfSATB3[i - 2][1][1]
+                diff_of_alto    = self.arrayOfSATB3[i - 1][0][1] - self.arrayOfSATB3[i - 2][1][1]
+                diff_of_tenor   = self.arrayOfSATB3[i - 1][0][2] - self.arrayOfSATB3[i - 2][1][2]
+                diff_of_bass    = self.arrayOfSATB3[i - 1][0][3] - self.arrayOfSATB3[i - 2][1][3]
+            } else {
+                diff_of_soprano = self.arrayOfSATB3[i - 1][1][0] - self.arrayOfSATB3[i - 1][0][1]
+                diff_of_alto    = self.arrayOfSATB3[i - 1][1][1] - self.arrayOfSATB3[i - 1][0][1]
+                diff_of_tenor   = self.arrayOfSATB3[i - 1][1][2] - self.arrayOfSATB3[i - 1][0][2]
+                diff_of_bass    = self.arrayOfSATB3[i - 1][1][3] - self.arrayOfSATB3[i - 1][0][3]
+            }
             
             print("diff_of_soprano:" + String(diff_of_soprano))
             print("diff_of_alto:" + String(diff_of_alto))
@@ -222,13 +233,19 @@ struct ContentView: View {
             print("diff_of_bass:" + String(diff_of_bass))
             
             // 同方向への三段跳躍チェック
-            if self.nowBeat == 1 {
-                let diff_of_soprano_1_before = self.arrayOfSATB3[i - 1][1][0] - self.arrayOfSATB3[i - 1][0][0]
-                let diff_of_soprano_2_before = self.arrayOfSATB3[i - 1][0][0] - self.arrayOfSATB3[i - 2][1][0]
-                let diff_of_soprano_3_before = self.arrayOfSATB3[i - 2][1][0] - self.arrayOfSATB3[i - 2][0][0]
-                print(diff_of_soprano_1_before)
-                print(diff_of_soprano_2_before)
-                print(diff_of_soprano_3_before)
+            if i >= 2 {
+                var diff_of_soprano_1_before = 0
+                var diff_of_soprano_2_before = 0
+                var diff_of_soprano_3_before = 0
+                if self.nowBeat == 1 {
+                    diff_of_soprano_1_before = self.arrayOfSATB3[i - 1][1][0] - self.arrayOfSATB3[i - 1][0][0]
+                    diff_of_soprano_2_before = self.arrayOfSATB3[i - 1][0][0] - self.arrayOfSATB3[i - 2][1][0]
+                    diff_of_soprano_3_before = self.arrayOfSATB3[i - 2][1][0] - self.arrayOfSATB3[i - 2][0][0]
+                } else if i >= 3 {
+                    diff_of_soprano_1_before = self.arrayOfSATB3[i - 1][0][0] - self.arrayOfSATB3[i - 2][1][0]
+                    diff_of_soprano_2_before = self.arrayOfSATB3[i - 2][1][0] - self.arrayOfSATB3[i - 2][0][0]
+                    diff_of_soprano_3_before = self.arrayOfSATB3[i - 2][0][0] - self.arrayOfSATB3[i - 3][1][0]
+                }
                 
                 if diff_of_soprano_1_before >= 3 && diff_of_soprano_2_before >= 3 && diff_of_soprano_3_before >= 3 {
                     judgeResult = "ソプラノが同方向への三段跳躍しているよ"
