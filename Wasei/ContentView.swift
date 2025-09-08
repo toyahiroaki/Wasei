@@ -208,12 +208,12 @@ struct ContentView: View {
             var diff_of_tenor = 0
             var diff_of_bass = 0
             if self.nowBeat == 0 {
-                diff_of_soprano = self.arrayOfSATB3[i - 1][0][0] - self.arrayOfSATB3[i - 2][1][1]
+                diff_of_soprano = self.arrayOfSATB3[i - 1][0][0] - self.arrayOfSATB3[i - 2][1][0]
                 diff_of_alto    = self.arrayOfSATB3[i - 1][0][1] - self.arrayOfSATB3[i - 2][1][1]
                 diff_of_tenor   = self.arrayOfSATB3[i - 1][0][2] - self.arrayOfSATB3[i - 2][1][2]
                 diff_of_bass    = self.arrayOfSATB3[i - 1][0][3] - self.arrayOfSATB3[i - 2][1][3]
             } else {
-                diff_of_soprano = self.arrayOfSATB3[i - 1][1][0] - self.arrayOfSATB3[i - 1][0][1]
+                diff_of_soprano = self.arrayOfSATB3[i - 1][1][0] - self.arrayOfSATB3[i - 1][0][0]
                 diff_of_alto    = self.arrayOfSATB3[i - 1][1][1] - self.arrayOfSATB3[i - 1][0][1]
                 diff_of_tenor   = self.arrayOfSATB3[i - 1][1][2] - self.arrayOfSATB3[i - 1][0][2]
                 diff_of_bass    = self.arrayOfSATB3[i - 1][1][3] - self.arrayOfSATB3[i - 1][0][3]
