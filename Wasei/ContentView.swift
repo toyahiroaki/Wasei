@@ -81,16 +81,6 @@ struct ContentView: View {
     @State var judgeResult = "判定結果の初期値"
     @State var chordName: [[String]] = [["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"]]
     
-    @State var arrayOfSATB:[[Int]] = [
-        [0,0,0,0],[0,0,0,0],
-        [0,0,0,0],[0,0,0,0],
-        [0,0,0,0],[0,0,0,0],
-        [0,0,0,0],[0,0,0,0],
-        [0,0,0,0],[0,0,0,0],
-        [0,0,0,0],[0,0,0,0],
-        [0,0,0,0],[0,0,0,0],
-        [0,0,0,0],[0,0,0,0]
-    ]
     @State var arrayOfSATB3:[[[Int]]] = [
         [[0,0,0,0],[0,0,0,0]],
         [[0,0,0,0],[0,0,0,0]],
@@ -173,7 +163,6 @@ struct ContentView: View {
                     judgeResult = "四声にしてね"
                     return
                 }
-                self.arrayOfSATB[i - 1][arrayOfSATBCount] = midiMap[j]
                 self.arrayOfSATB3[i - 1][self.nowBeat][arrayOfSATBCount] = midiMap[j]
 
                 arrayOfSATBCount += 1
@@ -185,21 +174,24 @@ struct ContentView: View {
         }
         
         // 音域チェック
-        if self.arrayOfSATB[i - 1][0] > 57 || self.arrayOfSATB[i - 1][0] < 36 {
+        if self.arrayOfSATB3[i - 1][self.nowBeat][0] > 57 || self.arrayOfSATB3[i - 1][self.nowBeat][0] < 36 {
             judgeResult = "ソプラノの音域はC2〜A3にしてね"
             return
         }
-        if self.arrayOfSATB[i - 1][1] > 50 || self.arrayOfSATB[i - 1][1] < 31 {
+        if self.arrayOfSATB3[i - 1][self.nowBeat][1] > 50 || self.arrayOfSATB3[i - 1][self.nowBeat][1] < 31 {
             judgeResult = "アルトの音域はG1〜D3にしてね"
             return
         }
-        if self.arrayOfSATB[i - 1][2] > 45 || self.arrayOfSATB[i - 1][2] < 24 {
+        if self.arrayOfSATB3[i - 1][self.nowBeat][2] > 45 || self.arrayOfSATB3[i - 1][self.nowBeat][2] < 24 {
             judgeResult = "テノールの音域はC1〜A2にしてね"
             return
         }
         
         // 導音重複不良のチェック
-        let array = [self.arrayOfSATB[i - 1][0] % 12, self.arrayOfSATB[i - 1][1]  % 12, self.arrayOfSATB[i - 1][2]  % 12, self.arrayOfSATB[i - 1][2]  % 12]
+        var array:[Int] = []
+        for l in 0 ..< 4{
+            array.append(self.arrayOfSATB3[i - 1][self.nowBeat][l] % 12)
+        }
 
         let duplicates = Dictionary(grouping: array, by: { $0 })
             .filter { $1.count > 1 }
@@ -379,7 +371,7 @@ struct ContentView: View {
             
             // 隠伏5度のチェック
             if diff_of_soprano * diff_of_bass > 0 {
-                if (abs(self.arrayOfSATB[i - 1][0] - self.arrayOfSATB[i - 1][3])) % 12 == 7 {
+                if (abs(self.arrayOfSATB3[i - 1][self.nowBeat][0] - self.arrayOfSATB3[i - 1][self.nowBeat][3])) % 12 == 7 {
                     judgeResult = "外声（ソプラノとバス）が同方向に進行し、結果として完全5度の関係（隠伏5度）になっているよ."
                     return
                 }
