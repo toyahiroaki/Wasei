@@ -166,6 +166,15 @@ struct ContentView: View {
             }
         }
         
+        // ルートがAの場合
+        if self.questions2[self.qNo][i][k]  == 15 {
+            let targetsA = [0, 4, 9]
+            if (targetsA.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Am"
+                return
+            }
+        }
+        
         self.chordName[i][k] = "?"
         return
     }
