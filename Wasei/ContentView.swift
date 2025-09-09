@@ -141,8 +141,8 @@ struct ContentView: View {
         
         // ルートがDの場合
         if self.questions2[self.qNo][i][k]  == 19 {
-            let targetsD = [2, 5, 9]
-            if (targetsD.allSatisfy{ uniqueSorted.contains($0) }){
+            let targetsDm = [2, 5, 9]
+            if (targetsDm.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "Dm"
                 return
             }
@@ -162,6 +162,12 @@ struct ContentView: View {
             let targetsF = [0, 5, 9]
             if (targetsF.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "F"
+                return
+            }
+            
+            let targetsDmonF = [2, 5, 9]
+            if (targetsDmonF.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Dm/F"
                 return
             }
         }
