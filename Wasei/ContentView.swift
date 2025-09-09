@@ -197,6 +197,18 @@ struct ContentView: View {
                 self.chordName[i][k] = "G"
                 return
             }
+            
+            let targetsConG = [0, 4, 7]
+            if (targetsConG.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "C/G"
+                return
+            }
+            
+            let targetsEmonG = [4, 7, 11]
+            if (targetsEmonG.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Em/G"
+                return
+            }
         }
         
         // ルートがAの場合
