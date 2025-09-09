@@ -6,8 +6,16 @@
 //
 
 import SwiftUI
+import AVFoundation
+var player: AVAudioPlayer!
 
 struct ContentView: View {
+    
+    let musicplayer_top = SoundPlayer()
+    
+    func playMusic(filename: String) {
+            musicplayer_top.musicPlayer(filename: filename)
+        }
     
     @State private var show: Bool = false
     
@@ -560,6 +568,7 @@ struct ContentView: View {
                         ForEach(data, id: \.self) { row in
                             HStack(spacing: 0) {
                                 Button(" " + midiData[row] + "    ") {
+                                    playMusic(filename: midiData[row])
                                     coloring(i: column, j: row, k: 0)
                                     judgeChord(i: column, k: 0)
                                 }
