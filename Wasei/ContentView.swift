@@ -150,9 +150,21 @@ struct ContentView: View {
         
         // ルートがEの場合
         if self.questions2[self.qNo][i][k]  == 18 {
-            let targetsE = [4, 7, 11]
-            if (targetsE.allSatisfy{ uniqueSorted.contains($0) }){
+            let targetsEm = [4, 7, 11]
+            if (targetsEm.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "E"
+                return
+            }
+            
+            let targetsConE = [0, 4, 7]
+            if (targetsConE.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "C/E"
+                return
+            }
+            
+            let targetsAmonC = [0, 4, 9]
+            if (targetsAmonC.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Am/E"
                 return
             }
         }
