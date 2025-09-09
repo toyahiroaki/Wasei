@@ -495,8 +495,7 @@ struct ContentView: View {
             headerView
             centerView
             footerView
-        }
-        //.padding()
+        }.background(col_cyan)
     }
     
     var headerView: some View {
