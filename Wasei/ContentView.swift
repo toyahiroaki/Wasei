@@ -573,10 +573,43 @@ struct ContentView: View {
                 self.nowPosition += 1
             }
             self.nowBeat = (self.nowBeat + 1) % 2
+            
+            // ４小節目の３拍目は１拍目と同じ音を設定する
+            if self.nowPosition == 4 && self.nowBeat == 1  {
+                for j in 0 ..< midiMap.count{
+                    if self.column_flag3[3][0][j] {
+                        self.column_flag3[3][1][j] = true
+                        
+                    }
+                }
+            }
+            
+            var counter = 0
             for j in 0 ..< midiMap.count{
                 if self.column_flag3[self.nowPosition - 1][self.nowBeat][j] {
+                    if self.nowPosition == 4 && self.nowBeat == 1  {
+                        counter += 1
+                        if counter <= 3 {
+                            self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_pink
+                        }
+                    }
                 } else {
-                    self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_cream
+                    if self.nowPosition == 4 && self.nowBeat == 1  {
+                        self.column_color3[self.nowPosition - 1][self.nowBeat][j] = Color.gray
+                        
+                    } else {
+                        self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_cream
+                    }
+                }
+            }
+            if self.nowPosition == 4 && self.nowBeat == 1  {
+                self.nowPosition += 1
+                self.nowBeat = 0
+                for j in 0 ..< midiMap.count{
+                    if self.column_flag3[self.nowPosition - 1][self.nowBeat][j] {
+                    } else {
+                        self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_cream
+                    }
                 }
             }
         }
