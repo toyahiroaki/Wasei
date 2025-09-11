@@ -11,11 +11,106 @@ var player: AVAudioPlayer!
 
 struct ContentView: View {
     
-    let musicplayer_top = SoundPlayer()
+    let musicplayer_one_note = SoundPlayer()
+    @State var musicplayer_soprano: [[SoundPlayer]] = []
+    @State var musicplayer_alto:    [[SoundPlayer]] = []
+    @State var musicplayer_tenor:   [[SoundPlayer]] = []
+    @State var musicplayer_bass:    [[SoundPlayer]] = []
     
-    func playMusic(filename: String) {
-            musicplayer_top.musicPlayer(filename: filename)
+    func playOneNote(filename: String) {
+        self.musicplayer_one_note.musicPlayer(filename: filename)
+    }
+    
+    func playMusic() {
+        for i in 0..<8{
+            var row: [SoundPlayer] = []
+            for k in 0..<2 {
+                print ("i:" + String(i))
+                print ("k:" + String(k))
+                let player = SoundPlayer()
+                row.append(player)
+            }
+            musicplayer_soprano.append(row)
         }
+        for i in 0..<8{
+            var row: [SoundPlayer] = []
+            for k in 0..<2 {
+                print ("i:" + String(i))
+                print ("k:" + String(k))
+                let player = SoundPlayer()
+                row.append(player)
+            }
+            musicplayer_alto.append(row)
+        }
+        for i in 0..<8{
+            var row: [SoundPlayer] = []
+            for k in 0..<2 {
+                print ("i:" + String(i))
+                print ("k:" + String(k))
+                let player = SoundPlayer()
+                row.append(player)
+            }
+            musicplayer_tenor.append(row)
+        }
+        for i in 0..<8{
+            var row: [SoundPlayer] = []
+            for k in 0..<2 {
+                print ("i:" + String(i))
+                print ("k:" + String(k))
+                let player = SoundPlayer()
+                row.append(player)
+            }
+            musicplayer_bass.append(row)
+        }
+
+        outerLoop:for i in 0..<8 {
+            for k in 0..<2 {
+                if let index = midiMap.firstIndex(of: arrayOfSATB3[i][k][3]) {
+                    print ("バス")
+                    print (arrayOfSATB3[i][k][3])
+                    print (midiData[index])
+                    musicplayer_bass[i][k].musicPlayer(filename: midiData[index])
+                } else {
+                    print("見つかりませんでした")
+                    break outerLoop
+                }
+                
+                if let index = midiMap.firstIndex(of: arrayOfSATB3[i][k][2]) {
+                    print ("テノール")
+                    print (arrayOfSATB3[i][k][2])
+                    print (midiData[index])
+                    musicplayer_tenor[i][k].musicPlayer(filename: midiData[index])
+                } else {
+                    print("見つかりませんでした")
+                    break outerLoop
+                }
+                
+                if let index = midiMap.firstIndex(of: arrayOfSATB3[i][k][1]) {
+                    print ("アルト")
+                    print (arrayOfSATB3[i][k][1])
+                    print (midiData[index])
+                    musicplayer_alto[i][k].musicPlayer(filename: midiData[index])
+                } else {
+                    print("見つかりませんでした")
+                    break outerLoop
+                }
+                
+                if let index = midiMap.firstIndex(of: arrayOfSATB3[i][k][0]) {
+                    print ("ソプラノ")
+                    print (arrayOfSATB3[i][k][0])
+                    print (midiData[index])
+                    musicplayer_soprano[i][k].musicPlayer(filename: midiData[index])
+                } else {
+                    print("見つかりませんでした")
+                    break outerLoop
+                }
+                
+                
+                
+                sleep(1)
+            }
+        }
+    }
     
     @State private var show: Bool = false
     
@@ -568,7 +663,7 @@ struct ContentView: View {
                         ForEach(data, id: \.self) { row in
                             HStack(spacing: 0) {
                                 Button(" " + midiData[row] + "    ") {
-                                    playMusic(filename: midiData[row])
+                                    playOneNote(filename: midiData[row])
                                     coloring(i: column, j: row, k: 0)
                                     judgeChord(i: column, k: 0)
                                 }
@@ -577,6 +672,7 @@ struct ContentView: View {
                                 .frame(width: 38, height: 5)
                                 .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
                                 Button(" " + midiData[row] + "    ") {
+                                    playOneNote(filename: midiData[row])
                                     coloring(i: column, j: row, k: 1)
                                     judgeChord(i: column, k: 1)
                                 }
@@ -599,24 +695,43 @@ struct ContentView: View {
     }
     
     var footerView: some View {
-        Button(action: {
-            judge(i: self.nowPosition)
-            self.isShowAlert = true
-        }){
-            Text("Next")
-            // 枠線のフレームを作成
-                .frame(width: 50, height: 25, alignment: .center)
-            // フレームのコーナー設定と枠線の太さ設定
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.red, lineWidth: 2)
-                )
-                .foregroundColor(Color.red)
-            // ボタンの背景色を設定
-                .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
-                .padding(20)
+        HStack {
+            Button(action: {
+                judge(i: self.nowPosition)
+                self.isShowAlert = true
+            }){
+                Text("Next")
+                // 枠線のフレームを作成
+                    .frame(width: 50, height: 25, alignment: .center)
+                // フレームのコーナー設定と枠線の太さ設定
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.red, lineWidth: 2)
+                    )
+                    .foregroundColor(Color.red)
+                // ボタンの背景色を設定
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+                    .padding(20)
+            }
+            .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
+            
+            Button(action: {
+                playMusic()
+            }){
+                Text("再生")
+                // 枠線のフレームを作成
+                    .frame(width: 50, height: 25, alignment: .center)
+                // フレームのコーナー設定と枠線の太さ設定
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.red, lineWidth: 2)
+                    )
+                    .foregroundColor(Color.red)
+                // ボタンの背景色を設定
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+                    .padding(20)
+            }
         }
-        .alert("判定結果", isPresented: $isShowAlert) {Button("OK") {}} message: {Text(judgeResult)}
     }
 }
 
