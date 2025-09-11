@@ -597,12 +597,12 @@ struct ContentView: View {
                         counter += 1
                         if counter <= 3 {
                             self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_pink
+                            self.arrayOfSATB3[self.nowPosition - 1][self.nowBeat][counter] = midiMap[j]
                         }
                     }
                 } else {
                     if self.nowPosition == 4 && self.nowBeat == 1  {
                         self.column_color3[self.nowPosition - 1][self.nowBeat][j] = Color.gray
-                        
                     } else {
                         self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_cream
                     }
