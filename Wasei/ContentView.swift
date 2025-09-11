@@ -291,6 +291,12 @@ struct ContentView: View {
                 self.chordName[i][k] = "Dm/F"
                 return
             }
+            
+            let targetsG7onF = [2, 5, 7, 11]
+            if (targetsG7onF.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "G7/F"
+                return
+            }
         }
         
         // ルートがGの場合
