@@ -594,11 +594,13 @@ struct ContentView: View {
             for j in 0 ..< midiMap.count{
                 if self.column_flag3[self.nowPosition - 1][self.nowBeat][j] {
                     if self.nowPosition == 4 && self.nowBeat == 1  {
-                        counter += 1
-                        if counter <= 3 {
+                        if counter < 3 {
                             self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_pink
+                        }
+                        if counter <= 3 {
                             self.arrayOfSATB3[self.nowPosition - 1][self.nowBeat][counter] = midiMap[j]
                         }
+                        counter += 1
                     }
                 } else {
                     if self.nowPosition == 4 && self.nowBeat == 1  {
@@ -619,8 +621,6 @@ struct ContentView: View {
                 }
             }
         }
-        
-        
         return
     }
     
