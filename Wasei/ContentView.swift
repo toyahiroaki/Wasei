@@ -571,8 +571,30 @@ struct ContentView: View {
             }
         }
         
-        if self.nowPosition == 8 && self.nowBeat == 1 {
+        if self.nowPosition == 8 && self.nowBeat == 0 {
             self.judgeResult = "クリア"
+            self.nowBeat = 1
+            // ８小節目の３拍目は１拍目と同じ音を設定する
+            for j in 0 ..< midiMap.count{
+                if self.column_flag3[self.nowPosition - 1][0][j] {
+                    self.column_flag3[self.nowPosition - 1][1][j] = true
+                    
+                }
+            }
+            var counter = 0
+            for j in 0 ..< midiMap.count{
+                if self.column_flag3[self.nowPosition - 1][self.nowBeat][j] {
+                    if counter < 3 {
+                        self.column_color3[self.nowPosition - 1][self.nowBeat][j] = col_pink
+                    }
+                    if counter <= 3 {
+                        self.arrayOfSATB3[self.nowPosition - 1][self.nowBeat][counter] = midiMap[j]
+                    }
+                    counter += 1
+                } else {
+                    self.column_color3[self.nowPosition - 1][self.nowBeat][j] = Color.gray
+                }
+            }
         } else {
             self.judgeResult = "OK"
             if self.nowBeat == 1  {
@@ -583,8 +605,8 @@ struct ContentView: View {
             // ４小節目の３拍目は１拍目と同じ音を設定する
             if self.nowPosition == 4 && self.nowBeat == 1  {
                 for j in 0 ..< midiMap.count{
-                    if self.column_flag3[3][0][j] {
-                        self.column_flag3[3][1][j] = true
+                    if self.column_flag3[self.nowPosition - 1][0][j] {
+                        self.column_flag3[self.nowPosition - 1][1][j] = true
                         
                     }
                 }
