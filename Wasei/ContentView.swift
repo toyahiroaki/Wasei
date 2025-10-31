@@ -313,7 +313,7 @@ struct ContentView: View {
         
         // ルートがGの場合
         if self.questions2[self.qNo][i][k]  == 16 {
-            let targetsG7 = [2, 5, 7, 11]
+            let targetsG7 = [5, 7, 11]
             if (targetsG7.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "G7"
                 return
@@ -385,21 +385,25 @@ struct ContentView: View {
             return
         }
         
-        // 導音重複不良のチェック
-        var array:[Int] = []
-        for l in 0 ..< 4{
-            array.append(self.arrayOfSATB3[i - 1][self.nowBeat][l] % 12)
+        // 公理Ａ２　限定進行音を重複してはならない
+        if (self.chordName[self.nowPosition - 1][self.nowBeat] == "G7") {
+            var array:[Int] = []
+            for l in 0 ..< 4{
+                array.append(self.arrayOfSATB3[i - 1][self.nowBeat][l] % 12)
+            }
+            
+            let duplicates = Dictionary(grouping: array, by: { $0 })
+                .filter { $1.count > 1 }
+                .map { $0.key }
+            if duplicates.contains(11) {
+                judgeResult = "導音が重複しているよ"
+                return
+            }
+            if duplicates.contains(5) {
+                judgeResult = "第７音が重複しているよ"
+                return
+            }
         }
-
-        let duplicates = Dictionary(grouping: array, by: { $0 })
-            .filter { $1.count > 1 }
-            .map { $0.key }
-        if duplicates.contains(11) {
-            judgeResult = "導音が重複しているよ"
-            return
-        }
-        
-        
         if !(i == 1 && self.nowBeat == 0) {
             var diff_of_soprano = 0
             var diff_of_alto = 0
