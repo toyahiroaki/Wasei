@@ -313,6 +313,12 @@ struct ContentView: View {
         
         // ルートがGの場合
         if self.questions2[self.qNo][i][k]  == 16 {
+            let targetsG7 = [2, 5, 7, 11]
+            if (targetsG7.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "G7"
+                return
+            }
+            
             let targetsG = [2, 7, 11]
             if (targetsG.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "G"
