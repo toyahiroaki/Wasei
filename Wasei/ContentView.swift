@@ -385,6 +385,30 @@ struct ContentView: View {
             return
         }
         
+        // 公理Ｂ２　限定進行音は、所定の限定進行か保留のいずれかをなさなければならない
+        if self.nowPosition >= 2 && self.nowBeat == 0 {
+            // 一つ前のソプラノの音が導音だったら
+            if self.arrayOfSATB3[i - 2][1][0] == 47 {
+                if self.arrayOfSATB3[i - 1][0][0]  != 48 && self.arrayOfSATB3[i - 1][0][0] != 47 {
+                    judgeResult = "導音は主音に進行するか、保留にしてね"
+                    return
+                }
+            }
+            /*
+            diff_of_soprano = self.arrayOfSATB3[i - 1][0][0] - self.arrayOfSATB3[i - 2][1][0]
+            diff_of_alto    = self.arrayOfSATB3[i - 1][0][1] - self.arrayOfSATB3[i - 2][1][1]
+            diff_of_tenor   = self.arrayOfSATB3[i - 1][0][2] - self.arrayOfSATB3[i - 2][1][2]
+            diff_of_bass    = self.arrayOfSATB3[i - 1][0][3] - self.arrayOfSATB3[i - 2][1][3]
+             */
+        } else {
+            /*
+            diff_of_soprano = self.arrayOfSATB3[i - 1][1][0] - self.arrayOfSATB3[i - 1][0][0]
+            diff_of_alto    = self.arrayOfSATB3[i - 1][1][1] - self.arrayOfSATB3[i - 1][0][1]
+            diff_of_tenor   = self.arrayOfSATB3[i - 1][1][2] - self.arrayOfSATB3[i - 1][0][2]
+            diff_of_bass    = self.arrayOfSATB3[i - 1][1][3] - self.arrayOfSATB3[i - 1][0][3]
+             */
+        }
+        
         // 公理Ａ２　限定進行音を重複してはならない
         if (self.chordName[self.nowPosition - 1][self.nowBeat] == "G7") {
             var array:[Int] = []
