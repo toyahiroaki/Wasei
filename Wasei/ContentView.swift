@@ -182,7 +182,7 @@ struct ContentView: View {
     
     @State var isShowAlert = false
     @State var judgeResult = "判定結果の初期値"
-    @State var chordName: [[String]] = [["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"],["?","?"]]
+    @State var chordName: [[String]] = [["?","?"],["?","?"],["?","?"],["?",""],["?","?"],["?","?"],["?","?"],["?",""]]
     
     @State var arrayOfSATB3:[[[Int]]] = [
         [[0,0,0,0],[0,0,0,0]],
