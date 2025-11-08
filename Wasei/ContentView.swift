@@ -223,11 +223,6 @@ struct ContentView: View {
         
         // ルートがCの場合
         if self.questions2[self.qNo][i][k]  == 20 {
-            let targets = [0, 4, 7]
-            if (targets.allSatisfy{ uniqueSorted.contains($0) }){
-                self.chordName[i][k] = "C"
-                return
-            }
             
             let targetsFonC = [0, 5, 9]
             if (targetsFonC.allSatisfy{ uniqueSorted.contains($0) }){
@@ -240,36 +235,40 @@ struct ContentView: View {
                 self.chordName[i][k] = "Am/C"
                 return
             }
+            
+            let targets = [0, 4]
+            if (targets.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "C"
+                return
+            }
         }
         
         // ルートがDの場合
         if self.questions2[self.qNo][i][k]  == 19 {
-            let targetsDm7 = [0, 2, 5, 9]
-            if (targetsDm7.allSatisfy{ uniqueSorted.contains($0) }){
-                self.chordName[i][k] = "Dm7"
-                return
-            }
-            
-            let targetsDm = [2, 5, 9]
-            if (targetsDm.allSatisfy{ uniqueSorted.contains($0) }){
-                self.chordName[i][k] = "Dm"
-                return
-            }
             
             let targetsGonD = [2, 7, 11]
             if (targetsGonD.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "G/D"
                 return
             }
+            
+            let targetsDm7 = [0, 2, 5]
+            if (targetsDm7.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Dm7"
+                return
+            }
+            
+            let targetsDm = [2, 5]
+            if (targetsDm.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Dm"
+                return
+            }
+            
+            
         }
         
         // ルートがEの場合
         if self.questions2[self.qNo][i][k]  == 18 {
-            let targetsEm = [4, 7, 11]
-            if (targetsEm.allSatisfy{ uniqueSorted.contains($0) }){
-                self.chordName[i][k] = "Em"
-                return
-            }
             
             let targetsConE = [0, 4, 7]
             if (targetsConE.allSatisfy{ uniqueSorted.contains($0) }){
@@ -282,6 +281,12 @@ struct ContentView: View {
                 self.chordName[i][k] = "Am/E"
                 return
             }
+            
+            let targetsEm = [4, 7]
+            if (targetsEm.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Em"
+                return
+            }
         }
         
         // ルートがFの場合
@@ -289,12 +294,6 @@ struct ContentView: View {
             let targetsDm7onF = [0, 2, 5, 9]
             if (targetsDm7onF.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "Dm7/F"
-                return
-            }
-            
-            let targetsF = [0, 5, 9]
-            if (targetsF.allSatisfy{ uniqueSorted.contains($0) }){
-                self.chordName[i][k] = "F"
                 return
             }
             
@@ -309,21 +308,17 @@ struct ContentView: View {
                 self.chordName[i][k] = "G7/F"
                 return
             }
+            
+            let targetsF = [5, 9]
+            if (targetsF.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "F"
+                return
+            }
+            
         }
         
         // ルートがGの場合
         if self.questions2[self.qNo][i][k]  == 16 {
-            let targetsG7 = [5, 7, 11]
-            if (targetsG7.allSatisfy{ uniqueSorted.contains($0) }){
-                self.chordName[i][k] = "G7"
-                return
-            }
-            
-            let targetsG = [2, 7, 11]
-            if (targetsG.allSatisfy{ uniqueSorted.contains($0) }){
-                self.chordName[i][k] = "G"
-                return
-            }
             
             let targetsConG = [0, 4, 7]
             if (targetsConG.allSatisfy{ uniqueSorted.contains($0) }){
@@ -336,11 +331,23 @@ struct ContentView: View {
                 self.chordName[i][k] = "Em/G"
                 return
             }
+            
+            let targetsG7 = [5, 7, 11]
+            if (targetsG7.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "G7"
+                return
+            }
+            
+            let targetsG = [7, 11]
+            if (targetsG.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "G"
+                return
+            }
         }
         
         // ルートがAの場合
         if self.questions2[self.qNo][i][k]  == 15 {
-            let targetsA = [0, 4, 9]
+            let targetsA = [0, 9]
             if (targetsA.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "Am"
                 return
