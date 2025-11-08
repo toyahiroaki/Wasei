@@ -347,6 +347,25 @@ struct ContentView: View {
         
         // ルートがAの場合
         if self.questions2[self.qNo][i][k]  == 15 {
+            
+            let targetsFonA = [0, 5, 9]
+            if (targetsFonA.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "F/A"
+                return
+            }
+            
+            let targetsDmonA = [2, 5, 9]
+            if (targetsDmonA.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Dm/A"
+                return
+            }
+            
+            let targetsAm7 = [0, 7, 9]
+            if (targetsAm7.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Am7"
+                return
+            }
+            
             let targetsA = [0, 9]
             if (targetsA.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "Am"
