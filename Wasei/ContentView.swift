@@ -224,6 +224,12 @@ struct ContentView: View {
         // ルートがCの場合
         if self.questions2[self.qNo][i][k]  == 20 {
             
+            let targetsDm7onC = [0, 2, 5, 9]
+            if (targetsDm7onC.allSatisfy{ uniqueSorted.contains($0) }){
+                self.chordName[i][k] = "Dm7/C"
+                return
+            }
+            
             let targetsFonC = [0, 5, 9]
             if (targetsFonC.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "F/C"
