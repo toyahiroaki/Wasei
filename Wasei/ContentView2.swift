@@ -179,10 +179,15 @@ struct ContentView2: View {
     
     func judgeChord(i: Int, k: Int) {
         var chordJudge: [Int] = []
+        var rootNote: Int = 9999
+        var noteCount: Int = 0
         for j in 0 ..< midiMap.count{
             if self.column_flag3[i][k][j] {
-                //self.chordJudge.append(midiMap[j] % 12)
+                noteCount = noteCount + 1
                 chordJudge.append(midiMap[j] % 12)
+                if noteCount == 4 {
+                    rootNote = midiMap[j] % 12
+                }
             }
         }
         let uniqueSorted = chordJudge.sorted().reduce(into: [Int]()) { result, value in
@@ -192,7 +197,7 @@ struct ContentView2: View {
         }
         
         // ルートがCの場合
-        if self.questions2[self.qNo][i][k]  == 20 {
+        if rootNote == 0 {
             
             let targetsDm7onC = [0, 2, 5, 9]
             if (targetsDm7onC.allSatisfy{ uniqueSorted.contains($0) }){
@@ -220,7 +225,7 @@ struct ContentView2: View {
         }
         
         // ルートがDの場合
-        if self.questions2[self.qNo][i][k]  == 19 {
+        if rootNote == 2 {
             
             let targetsGonD = [2, 7, 11]
             if (targetsGonD.allSatisfy{ uniqueSorted.contains($0) }){
@@ -244,7 +249,7 @@ struct ContentView2: View {
         }
         
         // ルートがEの場合
-        if self.questions2[self.qNo][i][k]  == 18 {
+        if rootNote == 4 {
             
             let targetsConE = [0, 4, 7]
             if (targetsConE.allSatisfy{ uniqueSorted.contains($0) }){
@@ -266,7 +271,8 @@ struct ContentView2: View {
         }
         
         // ルートがFの場合
-        if self.questions2[self.qNo][i][k]  == 17 {
+        if rootNote == 5 {
+            
             let targetsDm7onF = [0, 2, 5, 9]
             if (targetsDm7onF.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "Dm7/F"
@@ -294,8 +300,8 @@ struct ContentView2: View {
         }
         
         // ルートがGの場合
-        if self.questions2[self.qNo][i][k]  == 16 {
-            
+        if rootNote == 7 {
+
             let targetsConG = [0, 4, 7]
             if (targetsConG.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "C/G"
@@ -322,8 +328,8 @@ struct ContentView2: View {
         }
         
         // ルートがAの場合
-        if self.questions2[self.qNo][i][k]  == 15 {
-            
+        if rootNote == 9 {
+
             let targetsFonA = [0, 5, 9]
             if (targetsFonA.allSatisfy{ uniqueSorted.contains($0) }){
                 self.chordName[i][k] = "F/A"
@@ -514,6 +520,7 @@ struct ContentView2: View {
                 }
 
             }
+            /*
             // 同じ音を2声部が連続（連続ユニゾン）のチェック
             if diff_of_soprano == 0 && diff_of_alto == 0 {
                 judgeResult = "同じ音を2声部（ソプラノとアルト）が連続（連続ユニゾン）しているよ"
@@ -527,6 +534,7 @@ struct ContentView2: View {
                 judgeResult = "同じ音を2声部（アルトとテノール）が連続（連続ユニゾン）しているよ"
                 return
             }
+            */
             
             // ７度の跳躍チェック
             if abs(diff_of_soprano) == 10 {
