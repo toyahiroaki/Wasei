@@ -1,15 +1,15 @@
 //
-//  ContentView.swift
+//  ContentView2.swift
 //  Wasei
 //
-//  Created by 外谷浩章 on 2025/08/01.
+//  Created by 外谷浩章 on 2026/01/01.
 //
 
 import SwiftUI
 import AVFoundation
 //var player: AVAudioPlayer!
 
-struct ContentView: View {
+struct ContentView2: View {
     
     let musicplayer_one_note = SoundPlayer()
     @State var musicplayer_soprano: [[SoundPlayer]] = []
@@ -142,9 +142,9 @@ struct ContentView: View {
     ]
     
     let questions2:[[[Int]]] = [
-        [[20, 20],[20, 17],[18, 17],[16, 16],[15, 17],[18, 19],[16, 16],[20, 20]],
-        [[20, 21],[20, 16],[15, 17],[16, 16],[18, 17],[16, 16],[20, 17],[20, 20]],
-        [[20, 16],[15, 17],[17, 18],[16, 16],[20, 18],[17, 17],[16, 23],[20, 20]]
+        [[6, 6],[5, 7],[6, 3],[5, 5],[2, 3],[4, 6],[4, 5],[6, 6]],
+        [[6, 7],[6, 5],[4, 3],[5, 5],[2, 4],[3, 5],[6, 7],[6, 6]],
+        [[4, 6],[6, 7],[6, 4],[5, 5],[2, 3],[4, 3],[4, 5],[6, 6]]
     ]
     
     @State var qNo = 0
@@ -886,5 +886,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView2()
 }

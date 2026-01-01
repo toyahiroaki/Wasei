@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TopMenuView: View {
     @State private var show1: Bool = false
+    @State private var show2: Bool = false
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [.white, col_cyan]), startPoint: .top, endPoint: .bottom).ignoresSafeArea()
@@ -33,6 +34,26 @@ struct TopMenuView: View {
                 .sheet(isPresented: self.$show1) {
                     // trueになれば下からふわっと表示
                     ContentView()
+                }
+                Spacer().frame(height: 20)
+                Button(action: {
+                    self.show2.toggle()
+                }){
+                    Text("ソプラノ課題")
+                    // 枠線のフレームを作成
+                        .frame(width: 200, height: 30, alignment: .center)
+                    // フレームのコーナー設定と枠線の太さ設定
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.blue, lineWidth: 2)
+                        )
+                    // ボタンの背景色を設定
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+                        .padding(5)
+                }
+                .sheet(isPresented: self.$show2) {
+                    // trueになれば下からふわっと表示
+                    ContentView2()
                 }
                 Spacer()
             }
